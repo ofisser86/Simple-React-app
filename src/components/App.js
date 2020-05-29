@@ -1,14 +1,19 @@
 import React from 'react'
-import Article from './Article'
+import ArticleList from './ArticleList'
 import articles from '../fixtures'
+import 'bootstrap/dist/css/bootstrap.css'
 
 function App(){
-    return( <div>
-        
-      <Article article={articles[0]}  foo="bar" flag={true} />
-      <p>h2 txt here </p>
-    </div>
+    return( 
+        <div className="container">
+            <div className="jumbotron">
+                <h1 className="display-3">Articles list</h1>
+            </div>
+            
+            <ArticleList articles={articles}/>
+
+        </div>
     )
-    }
+}
 
 export default App
