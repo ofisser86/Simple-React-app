@@ -4,8 +4,8 @@ import './style.css'
 
 
 export default function ArticleList({articles}){
-    const articalElement = articles.map(articl => 
-        <li key= {articl.id}><Article article={articl}/></li>
+    const articalElement = articles.map((articl, index) => 
+        <li key= {articl.id}><Article article={articl} defaultOpen = {index === 0} /></li>
         )
     return(
 

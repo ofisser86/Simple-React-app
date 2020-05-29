@@ -15,7 +15,31 @@ class Article extends Component {
     // Experimental syntax
     state = {
 
-        isOpen: true
+        isOpen: this.props.defaultOpen,
+        count: 0
+    }
+
+    shouldComponentUpdate(nextProps, nextState){
+        return this.state.isOpen !== nextState.isOpen
+
+
+    }
+    componentWillMount(){
+        console.log("---", 'mounting')
+
+    }
+
+    componentWillReceiveProps(nextProps){
+        console.log("---", 'will recieve')
+        if (nextProps.defaultOpen !== this.props.defaultOpen) this.setState(
+            {
+                isOpen:nextProps.defaultOpen
+            }
+        )
+    }
+
+    componentWillUpdate(){
+        console.log("---", 'will update')
     }
 
     render() {
@@ -25,8 +49,9 @@ class Article extends Component {
         return (
             <div className="card mx-auto"  style={{width:'75%'}}>
                 <div className="card-header">
-                    <h2>
+                    <h2 onClick={this.incrementCounter}>
                         {article.title}
+                        clicked {this.state.count}
                         <button className="btn btn-primary btn-lg float-right" onClick={this.handleClick}>
                             {this.state.isOpen ? 'close' : 'open'}
                         </button>
@@ -51,9 +76,13 @@ class Article extends Component {
             isOpen: !this.state.isOpen
 
         })
+        }
 
-    }
-
+        incrementCounter = () => {
+            this.setState({
+                count: this.state.count + 1
+            })
+        }
     //===================Basic React component with restrict functionality=====================
     // function Article(props){
     //     const {article} = props

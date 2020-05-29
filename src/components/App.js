@@ -1,19 +1,27 @@
-import React from 'react'
+import React, { Component } from 'react'
 import ArticleList from './ArticleList'
 import articles from '../fixtures'
 import 'bootstrap/dist/css/bootstrap.css'
 
-function App(){
-    return( 
+class App extends Component {
+    state = {
+        reverted: false
+    }
+    render() { return( 
         <div className="container">
             <div className="jumbotron">
                 <h1 className="display-3">Articles list</h1>
+                <button className="btn btn-primary" onClick={this.revert}>Revert</button>
             </div>
             
-            <ArticleList articles={articles}/>
+            <ArticleList articles={this.state.reverted ? articles.slice().reverse() : articles}/>
 
         </div>
     )
+    }
+    revert = () => this.setState({
+        reverted: !this.state.reverted
+    })
 }
 
 export default App
